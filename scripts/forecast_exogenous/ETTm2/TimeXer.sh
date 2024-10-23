@@ -21,7 +21,7 @@ python3 -u run.py \
   --dec_in 7 \
   --c_out 7 \
   --d_model 512 \
-  --batch_size 4 \
+  --batch_size 16 \
   --des $des \
   --itr 1
 
