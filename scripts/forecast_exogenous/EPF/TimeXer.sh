@@ -17,7 +17,6 @@ python3 -u run.py \
   --seq_len 168 \
   --pred_len 24 \
   --e_layers 3 \
-  --d_layers 3 \
   --enc_in 3 \
   --dec_in 3 \
   --c_out 1 \
@@ -39,8 +38,7 @@ python3 -u run.py \
   --features MS \
   --seq_len 168 \
   --pred_len 24 \
-  --e_layers 2 \
-  --d_layers 2 \
+  --e_layers 3 \
   --enc_in 3 \
   --dec_in 3 \
   --c_out 1 \
@@ -62,7 +60,6 @@ python3 -u run.py \
   --seq_len 168 \
   --pred_len 24 \
   --e_layers 2 \
-  --d_layers 2 \
   --enc_in 3 \
   --dec_in 3 \
   --c_out 1 \
@@ -86,7 +83,6 @@ python3 -u run.py \
   --seq_len 168 \
   --pred_len 24 \
   --e_layers 2 \
-  --d_layers 2 \
   --enc_in 3 \
   --dec_in 3 \
   --c_out 1 \
@@ -108,7 +104,6 @@ python3 -u run.py \
   --seq_len 168 \
   --pred_len 24 \
   --e_layers 1 \
-  --d_layers 1 \
   --enc_in 3 \
   --dec_in 3 \
   --c_out 1 \
