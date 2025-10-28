@@ -54,9 +54,10 @@ class Exp_Basic(object):
                 os.environ["CUDA_VISIBLE_DEVICES"] = str(self.args.gpu)  
                 device = torch.device('cuda:{}'.format(self.args.gpu))  
             elif torch.backends.mps.is_available():  # 添加 MPS 支持  
-                device = torch.device('mps')  
+                device = torch.device('mps')
             else:  
-                device = torch.device('cpu')  
+                device = torch.device('cpu')
+            print('Use device:', device)  
         else:
             device = torch.device('cpu')
             print('Use CPU')
