@@ -3,6 +3,7 @@ export CUDA_VISIBLE_DEVICES=1
 model_name=TimeXer
 des='Timexer-MS'
 
+alias python3='python'
 
 python3 -u run.py \
   --task_name long_term_forecast \

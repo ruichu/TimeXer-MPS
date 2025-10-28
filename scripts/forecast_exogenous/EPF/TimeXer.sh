@@ -4,6 +4,7 @@ model_name=TimeXer
 des='Timexer-MS'
 patch_len=24
 
+alias python3='python'
 
 python3 -u run.py \
   --is_training 1 \

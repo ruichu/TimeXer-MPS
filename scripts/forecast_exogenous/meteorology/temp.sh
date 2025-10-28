@@ -1,6 +1,8 @@
 export CUDA_VISIBLE_DEVICES=0
 model_name=TimeXer
 
+alias python3='python'
+
 python3 -u run.py \
   --task_name long_term_forecast \
   --is_training 1 \
