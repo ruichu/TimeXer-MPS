@@ -247,8 +247,8 @@ class Dataset_Custom(Dataset):
         cols.remove(self.target)
         cols.remove('date')
         df_raw = df_raw[['date'] + cols + [self.target]]
-        num_train = int(len(df_raw) * 0.8)
-        num_test = 24 #int(len(df_raw) * 0.2)
+        num_train = int(len(df_raw) * 0.9)
+        num_test = 10 #int(len(df_raw) * 0.2)
         num_vali = len(df_raw) - num_train - num_test
         border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len]
         border2s = [num_train, num_train + num_vali, len(df_raw)]
@@ -298,6 +298,10 @@ class Dataset_Custom(Dataset):
         seq_y = self.data_y[r_begin:r_end]
         seq_x_mark = self.data_stamp[s_begin:s_end]
         seq_y_mark = self.data_stamp[r_begin:r_end]
+
+        # if it is test set
+        if self.set_type == 2:
+            print("seq_x: ", (s_begin, s_end), "seq_y: ", (r_begin, r_end), "seq_x_mark: ", (s_begin, s_end), "seq_y_mark:", (r_begin, r_end))
 
         return seq_x, seq_y, seq_x_mark, seq_y_mark
 

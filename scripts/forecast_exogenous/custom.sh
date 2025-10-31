@@ -7,7 +7,7 @@ patch_len=24
 alias python3='python'
 
 python3 -u run.py \
-  --is_training 1 \
+  --is_training 0 \
   --task_name long_term_forecast \
   --root_path ../dataset/ \
   --data_path dataset.csv \
@@ -16,7 +16,7 @@ python3 -u run.py \
   --data custom \
   --features MS \
   --seq_len 168 \
-  --pred_len 24 \
+  --pred_len 1 \
   --e_layers 3 \
   --enc_in 6 \
   --dec_in 3 \
@@ -25,8 +25,9 @@ python3 -u run.py \
   --patch_len $patch_len \
   --d_model 512 \
   --d_ff 512 \
-  --batch_size 64 \
+  --batch_size 32 \
   --itr 1 \
   --target load \
   --freq d \
-  --embed fixed
+  --embed fixed \
+  --inverse

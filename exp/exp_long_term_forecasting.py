@@ -190,6 +190,15 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         self.model.eval()
         with torch.no_grad():
             for i, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(test_loader):
+                print(batch_x.shape, batch_y.shape, batch_x_mark.shape, batch_y_mark.shape)
+
+                batch_x_inversed = test_data.inverse_transform(batch_x[0])
+                batch_y_inversed = test_data.inverse_transform(batch_y[0])
+                print(batch_x_inversed[-1])
+                print(batch_y_inversed[-1])
+                print(batch_x_mark[0])
+                #print(batch_y_mark[0])
+
                 batch_x = batch_x.float().to(self.device)
                 batch_y = batch_y.float().to(self.device)
 
@@ -224,9 +233,28 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                         outputs = np.tile(outputs, [1, 1, batch_y.shape[-1]])
                     outputs = test_data.inverse_transform(outputs.reshape(shape[0] * shape[1], -1)).reshape(shape)
                     batch_y = test_data.inverse_transform(batch_y.reshape(shape[0] * shape[1], -1)).reshape(shape)
-        
+
                 outputs = outputs[:, :, f_dim:]
                 batch_y = batch_y[:, :, f_dim:]
+
+                print("outputs: ", outputs, "batch_y: ", batch_y)
+                # get mape of batch_y and outputs
+                mape = np.mean(np.abs(outputs - batch_y) / batch_y) * 100
+                print("mape: ", mape)
+
+                # 计算mape_base（用前一个值来预测后一个）
+                # 构造新数字的数组（保持相同的shape结构）
+                output_first_element = batch_x[0, :, :].detach().cpu().numpy()
+                output_first_element = test_data.inverse_transform(output_first_element)
+                output_first_element = output_first_element[-1,-1].reshape(1,1,1)
+                # 提取原数组中除最后一个元素外的所有元素（前3个元素）
+                output_base = batch_y[:-1]
+                # 拼接新元素和剩余元素，保持shape为(4,1,1)
+                output_base = np.concatenate([output_first_element, output_base], axis=0)
+                #print("output_base", output_base)
+
+                mape_base = np.mean(np.abs(output_base - batch_y) / batch_y) * 100
+                print("mape base: ", mape_base)
 
                 pred = outputs
                 true = batch_y
